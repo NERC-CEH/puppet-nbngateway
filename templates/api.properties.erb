@@ -1,0 +1,34 @@
+# The following properties file defines the some constants which are required
+# in order to power some SSO and other aspects of the API project
+
+sso_token_domain = .nbn.org.uk
+
+# Define location of Solr Server
+solr_url = http://localhost:7000/solr
+
+# Define location of NBN Gateway Portal
+portal_url = <%= @portal_location %>
+
+# Warehouse database connection
+db_warehouse_url = <%= @db_warehouse_url %>
+db_warehouse_username = <%= @api_db_user %>
+db_warehouse_password = <%= @api_db_password %>
+
+# Core database connection
+db_core_url = <%= @db_core_url %>
+db_core_username = <%= @api_db_user %>
+db_core_password = <%= @api_db_password %>
+
+# Add admin email address for sending task failures to
+admin_email = matt.debont@jncc.gov.uk
+sysadmin_name = nbnsysadmin
+silent_revoke = true
+
+# Turn on emails
+email_mode = live
+
+# Send the cookie only on secure connections
+secure_cookie = true
+
+#Species Dictionary Last Updated on
+species_dictionary_updated = 12th March 2014

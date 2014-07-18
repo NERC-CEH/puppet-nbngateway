@@ -1,0 +1,12 @@
+# The following properties file defines the some constants which are required
+# in order to power some of the maps defined in this gis project
+
+api = <%= @api_location %>
+
+spatialConnection = MSSQL:driver=FreeTDS;dsn=nbnwarehouse;Database=<%= @warehouse_db %>;uid=<%= @gis_db_username %>;pwd=<%= @gis_db_password %>;Integrated Security=True;GeometryFormat=native
+
+contextLayersLocation = /maps
+
+# Define the defaults for the bread bakers
+bread.taxon.cacheDir = /maps/taxonCache
+bread.context.cacheDir = /maps/contextCache
