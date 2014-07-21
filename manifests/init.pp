@@ -19,7 +19,8 @@ class nbngateway (
   $api_db_user         = 'NBNTestAPI',
   $importer_db_user    = 'NBNImporter',
   $gis_db_username     = 'NBNGIS',
-  $environment         = 'development'
+  $environment         = 'development',
+  $use_nexus           = false
 ) {
   $warehouse_db_server = $environment ? {
     'production' => 'nbnwarehouse.nerc-lancaster.ac.uk',
@@ -49,6 +50,7 @@ class nbngateway (
   }
 
   include nbngateway::webserver
+  include nbngateway::webapps
   include nbngateway::redirects
   include nbngateway::static
   include nbngateway::maps
