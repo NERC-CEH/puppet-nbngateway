@@ -5,8 +5,8 @@ api = <%= @api_location %>
 
 spatialConnection = MSSQL:driver=FreeTDS;dsn=nbnwarehouse;Database=<%= @warehouse_db %>;uid=<%= @gis_db_username %>;pwd=<%= @gis_db_password %>;Integrated Security=True;GeometryFormat=native
 
-contextLayersLocation = /maps
+contextLayersLocation = /var/nbn/maps
 
 # Define the defaults for the bread bakers
-bread.taxon.cacheDir = /maps/taxonCache
-bread.context.cacheDir = /maps/contextCache
+bread.taxon.cacheDir = /var/nbn/taxonCache
+bread.context.cacheDir = /var/nbn/contextCache

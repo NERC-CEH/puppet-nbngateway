@@ -14,6 +14,8 @@ class nbngateway (
   $ssl_key,
   $ssl_chain,
   $vector_shapefiles,
+  $os_modern,
+  $os_tiled,
   $ssl_root            = '/etc/ssl/certs/GlobalSign_Root_CA.pem',
   $master_db_sever     = 'nbn-master.nerc-lancaster.ac.uk',
   $api_db_user         = 'NBNTestAPI',

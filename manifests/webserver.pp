@@ -40,19 +40,27 @@ class nbngateway::webserver(
     docroot   => '/opt/nbn-www',
   }
 
+  # Replace the . in the servername of the data with \. So that we can use it as a 
+  # regular expression
+  $data_servername_regex = regsubst($nbngateway::data_servername, '\.', '\.', 'G')
+
   apache::vhost { 'https_gis.nbn.org.uk' :
-    docroot    => '/maps',
+    docroot    => '/var/nbn/maps',
     servername => $nbngateway::gis_servername,
     rewrites   => [
         {
+          rewrite_cond => ["%{HTTP_REFERER} !^https://${data_servername_regex}/imt.*$ [NC]"],
+          rewrite_rule => ['/Tiled/. - [F]'],
+        },
+        {
           comment      => 'Redirect missing tiles',
           rewrite_cond => ['%{DOCUMENT_ROOT}%{REQUEST_URI} !-f'],
-          rewrite_rule => ['\.(png) /maps/Tiled/missing.png [NC,L]'],
+          rewrite_rule => ['\.(png) /var/nbn/maps/Tiled/missing.png [NC,L]'],
         },
         {
           comment      => 'Redirect arcgis to old-gis.nbn.org.uk',
-          rewrite_rule => ['/arcgis/(.*) http://old-gis.nbn.org.uk/arcgis/$1'],
-        },
+          rewrite_rule => ['/arcgis/(.*) http://old-gis\.nbn\.org\.uk/arcgis/$1'],
+        }
     ],
     proxy_pass => [
       {path => '/Tiled', url => '!'},
