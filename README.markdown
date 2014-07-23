@@ -14,7 +14,7 @@ This module is designed specifically for contributors to the NBN Gateway code ba
 
 ## Setup
 
-### What Selendroid affects
+### What NBNGateway affects
 
 * Installs apache
 * Installs mapserver
