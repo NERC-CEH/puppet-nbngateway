@@ -53,7 +53,7 @@ class nbngateway::webserver::webapps (
 
   tomcat::deployment { 'deploy the record cleaner webapp' :
     tomcat      => 'data',
-    group       => 'uk.gov.nbn.data'
+    group       => 'uk.gov.nbn.data',
     artifact    => 'nbnv-recordcleaner',
     application => 'recordcleaner',
     war         => $recordcleaner_war,

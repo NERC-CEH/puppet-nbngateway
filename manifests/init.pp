@@ -72,6 +72,11 @@ class nbngateway (
     'production'  => 'data.nbn.org.uk',
   }
 
+  # The servernames should resolve to this box internally
+  host { [$data_servername, $gis_servername] :
+    ip => '127.0.0.1',
+  }
+
   include nbngateway::maps
   include nbngateway::settings
   include nbngateway::webserver
@@ -79,8 +84,6 @@ class nbngateway (
   include nbngateway::webserver::redirects
   include nbngateway::webserver::static
 
-  # The servernames should resolve to this box internally
-  host { [$data_servername, $gis_servername] :
-    ip => '127.0.0.1',
-  }
+  Class['tomcat'] -> Class['nbngateway::maps']
+  Class['tomcat'] -> Class['nbngateway::settings']
 }

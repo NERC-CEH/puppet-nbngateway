@@ -30,12 +30,14 @@ class nbngateway::maps {
     owner  => $::tomcat::user,
     group  => $::tomcat::group,
     ensure => directory,
+    before => Service['tomcat7-gis'],
   }
 
   file { '/var/nbn/contextCache' :
     owner  => $::tomcat::user,
     group  => $::tomcat::group,
     ensure => directory,
+    before => Service['tomcat7-gis'],
   }
 
   file { '/var/nbn/maps' :
