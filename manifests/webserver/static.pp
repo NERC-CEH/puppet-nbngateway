@@ -1,4 +1,4 @@
-# == Class: nbngateway::static
+# == Class: nbngateway::webserver::static
 #
 # This is the static class, it will populate the nbn-www directory with small
 # static content that the NBN Gateway requires for hosting but hasn't been stored
@@ -8,7 +8,7 @@
 #
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
-class nbngateway::static {
+class nbngateway::webserver::static {
    file { '/opt/nbn-www' :
       ensure  => directory,
    }

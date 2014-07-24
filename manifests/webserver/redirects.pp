@@ -1,4 +1,4 @@
-# == Class: nbngateway::redirects
+# == Class: nbngateway::webserver::redirects
 #
 # This is the redirects class, it will configure some webserver redirects.
 #
@@ -10,7 +10,7 @@
 #
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
-class nbngateway::redirects {
+class nbngateway::webserver::redirects {
   Apache::Vhost {
     docroot       => '/var/www',
     default_vhost => true,

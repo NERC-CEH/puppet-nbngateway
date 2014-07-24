@@ -1,4 +1,4 @@
-# == Class: nbngateway::webapps
+# == Class: nbngateway::webserver::webapps
 #
 # This is the webapps class, if defines all of the web applications which 
 # should be deployed into tomcat servlet containers on the nbn web server.
@@ -23,7 +23,7 @@
 #
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
-class nbngateway::webapps (
+class nbngateway::webserver::webapps (
   $portal_war           = undef,
   $imt_war              = undef,
   $recordcleaner_war    = undef,

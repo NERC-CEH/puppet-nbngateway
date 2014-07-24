@@ -72,12 +72,12 @@ class nbngateway (
     'production'  => 'data.nbn.org.uk',
   }
 
-  include nbngateway::webserver
-  include nbngateway::webapps
-  include nbngateway::redirects
-  include nbngateway::static
   include nbngateway::maps
   include nbngateway::settings
+  include nbngateway::webserver
+  include nbngateway::webserver::webapps
+  include nbngateway::webserver::redirects
+  include nbngateway::webserver::static
 
   # The servernames should resolve to this box internally
   host { [$data_servername, $gis_servername] :
