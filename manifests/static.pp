@@ -1,5 +1,5 @@
 # Obtains the static content which is hosted from /var/www
-class nbngateway::static () {
+class nbngateway::static {
    file { '/opt/nbn-www' :
       ensure  => directory,
    }
