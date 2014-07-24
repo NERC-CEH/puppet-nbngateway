@@ -14,6 +14,7 @@
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
 class nbngateway::maps {
+  include tomcat
   include freetds
   include mapserver
 

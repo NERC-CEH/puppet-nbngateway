@@ -21,6 +21,8 @@ class nbngateway::settings (
   $importer_db_password = $nbngateway::importer_db_password,
   $gis_db_password      = $nbngateway::gis_db_password
 ) {
+  include tomcat
+  
   $portal_location = "https://${nbngateway::data_servername}"
   $gis_location = "https://${nbngateway::gis_servername}"
   $api_location = "${portal_location}/api"
