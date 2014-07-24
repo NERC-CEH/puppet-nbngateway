@@ -86,14 +86,14 @@ class nbngateway::webserver::webapps (
     war      => $gis_war,
   }
 
-  tomcat::deployment {
+  tomcat::deployment { 'deploy the importer webapp' :
     tomcat      => 'importer',
     artifact    => 'nbnv-importer-ui',
     application => 'importer',
     war         => $importer_war,
   }
 
-  tomcat::deployment {
+  tomcat::deployment { 'deploy the spatial importer webapp' :
     tomcat      => 'importer',
     artifact    => 'nbnv-importer-spatial-ui',
     application => 'spatial-importer',

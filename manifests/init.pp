@@ -84,6 +84,6 @@ class nbngateway (
   include nbngateway::webserver::redirects
   include nbngateway::webserver::static
 
-  Class['tomcat'] -> Class['nbngateway::maps']
-  Class['tomcat'] -> Class['nbngateway::settings']
+  Class['::tomcat'] -> Class['nbngateway::maps']
+  Class['::tomcat'] -> Class['nbngateway::settings']
 }
