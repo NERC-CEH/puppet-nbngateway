@@ -1,3 +1,14 @@
+# == Class: nbngateway::settings
+#
+# This is the settings class, it will configure the nbnv properties files
+#
+# === Parameters
+# The parameters are all derived from init.pp
+#
+# === Authors
+#
+# - Christopher Johnson - cjohn@ceh.ac.uk
+#
 class nbngateway::settings (
   $warehouse_db_server  = $nbngateway::warehouse_db_server,
   $master_db_sever      = $nbngateway::master_db_sever,

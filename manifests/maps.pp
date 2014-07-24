@@ -1,3 +1,18 @@
+# == Class: nbngateway::maps
+#
+# This is the maps class, it will:
+#
+# - set up an instance of mapserver
+# - create directories for bread to bake in
+# - link to OS tiled, Modern and vector files (defined in init.pp)
+# - set up a freetds database connection to the warehouse_db_server
+#
+# The static missing.png image is also copied in place
+#
+# === Authors
+#
+# - Christopher Johnson - cjohn@ceh.ac.uk
+#
 class nbngateway::maps {
   include freetds
   include mapserver

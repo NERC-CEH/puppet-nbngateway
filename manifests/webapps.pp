@@ -1,3 +1,28 @@
+# == Class: nbngateway::webapps
+#
+# This is the webapps class, if defines all of the web applications which 
+# should be deployed into tomcat servlet containers on the nbn web server.
+#
+# By default, webapps are obtained from your configured nexus server. If you 
+# wish to deploy a war file which has not been pushed to a nexus server, you 
+# can specify locations to files on disk.
+#
+# === Parameters
+#
+# [*portal_war*]            The location of the portal war file to deploy
+# [*imt_war*]               The location of the imt war file to deploy
+# [*recordcleaner_war*]     The location of the recordcleaner deploy locally
+# [*documentation_war*]     The location of the documentation deploy locally
+# [*api_war*]               The location of the api deploy locally
+# [*solr_war*]              The location of the solr deploy locally
+# [*gis_war*]               The location of the gis deploy locally
+# [*importer_war*]          The location of the importer deploy locally
+# [*spatial_importer_war*]  The location of the spatial importer deploy locally
+#
+# === Authors
+#
+# - Christopher Johnson - cjohn@ceh.ac.uk
+#
 class nbngateway::webapps (
   $portal_war           = undef,
   $imt_war              = undef,

@@ -1,3 +1,15 @@
+# == Class: nbngateway::redirects
+#
+# This is the redirects class, it will configure some webserver redirects.
+#
+# Here we will :
+# - forward traffic to https by default
+# - redirect www.searchnbn.net to the data servername
+#
+# === Authors
+#
+# - Christopher Johnson - cjohn@ceh.ac.uk
+#
 class nbngateway::redirects {
   Apache::Vhost {
     docroot       => '/var/www',

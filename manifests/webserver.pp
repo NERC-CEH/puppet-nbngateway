@@ -1,3 +1,21 @@
+# == Class: nbngateway::webserver
+#
+# This is the webserver class, it will set up apache web server vhosts, one for each
+# of the domain names which resolve to this web server and proxy various tomcat
+# instances.
+#
+# === Parameters
+#
+# [*solr_port*] The http port which the solr server will be running on
+# [*data_port*] The ajp port which the data tomcat server will be running on
+# [*api_port*] The ajp port which the api tomcat will be running on
+# [*gis_port*] The ajp port which the gis tomcat will be running on
+# [*importer_port*] The ajp port which the importer will be running on
+#
+# === Authors
+#
+# - Christopher Johnson - cjohn@ceh.ac.uk
+#
 class nbngateway::webserver(
   $solr_port     = 7000,
   $data_port     = 7100,
