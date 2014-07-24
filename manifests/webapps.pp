@@ -1,99 +1,77 @@
 class nbngateway::webapps (
-  $environment = $nbngateway::environment,
-  $use_nexus   = $nbngateway::use_nexus
+  $portal_war           = undef,
+  $imt_war              = undef,
+  $recordcleaner_war    = undef,
+  $documentation_war    = undef,
+  $api_war              = undef,
+  $solr_war             = undef,
+  $gis_war              = undef,
+  $importer_war         = undef,
+  $spatial_importer_war = undef
 ) {
-  if $use_nexus {
-    Tomcat::Deployment {
-      group => 'uk.org.nbn',
-    }
-
-    tomcat::deployment { 'deploy the portal webapp' :
-      tomcat   => 'data',
-      artifact => 'nbnv-portal',
-    }
-
-    tomcat::deployment { 'deploy the imt webapp' :
-      tomcat      => 'data',
-      artifact    => 'nbnv-imt',
-      application => 'imt',
-    }
-
-    tomcat::deployment { 'deploy the documentation webapp' :
-      tomcat      => 'data',
-      artifact    => 'nbnv-documentation',
-      application => 'Documentation',
-    }
-
-    tomcat::deployment { 'deploy the api' :
-      tomcat      => 'api',
-      artifact    => 'nbnv-api',
-      application => 'api',
-    }
-
-    tomcat::deployment { 'deploy the solr server' :
-      tomcat      => 'solr',
-      artifact    => 'nbnv-api-solr',
-      application => 'solr',
-    }
-
-    tomcat::deployment { 'deploy the gis webapp' :
-      tomcat   => 'gis',
-      artifact => 'nbnv-gis',
-    }
-
-#    tomcat::deployment {
-#      tomcat      => 'importer',
-#      artifact    => 'nbnv-importer-ui',
-#      application => 'importer',
-#    }
-#
-#    tomcat::deployment {
-#      tomcat      => 'importer',
-#      artifact    => 'nbnv-importer-spatial-ui',
-#      application => 'spatial-importer',
-#    }
+  Tomcat::Deployment {
+    group => 'uk.org.nbn',
   }
-  else {
-    tomcat::deployment { 'deploy the portal webapp' :
-      tomcat => 'data',
-      war    => '/vagrant/wars/portal.war',
-    }
 
-    tomcat::deployment { 'deploy the documentation webapp' :
-      tomcat      => 'data',
-      war         => '/vagrant/wars/docs.war',
-      application => 'Documentation',
-    }
+  tomcat::deployment { 'deploy the portal webapp' :
+    tomcat   => 'data',
+    artifact => 'nbnv-portal',
+    war      => $portal_war,
+  }
 
-    tomcat::deployment { 'deploy the api' :
-      tomcat      => 'api',
-      war         => '/vagrant/wars/api.war',
-      application => 'api',
-    }
+  tomcat::deployment { 'deploy the imt webapp' :
+    tomcat      => 'data',
+    artifact    => 'nbnv-imt',
+    application => 'imt',
+    war         => $imt_war,
+  }
 
-    tomcat::deployment { 'deploy the solr server' :
-      tomcat      => 'solr',
-      war         => '/vagrant/wars/solr.war',
-      application => 'solr',
-    }
+  tomcat::deployment { 'deploy the record cleaner webapp' :
+    tomcat      => 'data',
+    group       => 'uk.gov.nbn.data'
+    artifact    => 'nbnv-recordcleaner',
+    application => 'recordcleaner',
+    war         => $recordcleaner_war,
+  }
 
-    tomcat::deployment { 'deploy the gis webapp' :
-      tomcat => 'gis',
-      war    => '/vagrant/wars/gis.war',
-    }
+  tomcat::deployment { 'deploy the documentation webapp' :
+    tomcat      => 'data',
+    artifact    => 'nbnv-documentation',
+    application => 'Documentation',
+    war         => $documentation_war,
+  }
 
-#      tomcat::deployment {
-#        tomcat      => 'importer',
-#        war         => '/vagrant/wars/importer.war',
-#        application => 'importer',
-#      }
-#
-#      tomcat::deployment {
-#        tomcat      => 'importer',
-#        war         => '/vagrant/wars/spatial-importer.war',
-#        application => 'spatial-importer',
-#      }
+  tomcat::deployment { 'deploy the api' :
+    tomcat      => 'api',
+    artifact    => 'nbnv-api',
+    application => 'api',
+    war         => $api_war,
+  }
 
+  tomcat::deployment { 'deploy the solr server' :
+    tomcat      => 'solr',
+    artifact    => 'nbnv-api-solr',
+    application => 'solr',
+    war         => $solr_war,
+  }
 
+  tomcat::deployment { 'deploy the gis webapp' :
+    tomcat   => 'gis',
+    artifact => 'nbnv-gis',
+    war      => $gis_war,
+  }
+
+  tomcat::deployment {
+    tomcat      => 'importer',
+    artifact    => 'nbnv-importer-ui',
+    application => 'importer',
+    war         => $importer_war,
+  }
+
+  tomcat::deployment {
+    tomcat      => 'importer',
+    artifact    => 'nbnv-importer-spatial-ui',
+    application => 'spatial-importer',
+    war         => $spatial_importer_war,
   }
 }
