@@ -65,7 +65,12 @@ class nbngateway (
     'staging'     => 'staging-gis.nbn.org.uk',
     'production'  => 'gis.nbn.org.uk',
   }
-  
+
+  $gis_serveraliases = $environment ? {
+    'production' => ['gis1.nbn.org.uk', 'gis2.nbn.org.uk', 'gis3.nbn.org.uk', 'gis4.nbn.org.uk'],
+    default      => [],
+  }
+
   $data_servername = $environment ? {
     'development' => 'developer-data.nbn.org.uk',
     'staging'     => 'staging-data.nbn.org.uk',
