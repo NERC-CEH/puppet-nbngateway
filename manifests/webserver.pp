@@ -63,9 +63,10 @@ class nbngateway::webserver(
   $data_servername_regex = regsubst($nbngateway::data_servername, '\.', '\.', 'G')
 
   apache::vhost { 'https_gis.nbn.org.uk' :
-    docroot    => '/var/nbn/maps',
-    servername => $nbngateway::gis_servername,
-    rewrites   => [
+    docroot       => '/var/nbn/maps',
+    servername    => $nbngateway::gis_servername,
+    serveraliases => $nbngateway::gis_serveraliases,
+    rewrites      => [
         {
           rewrite_cond => ["%{HTTP_REFERER} !^https://${data_servername_regex}/imt.*$ [NC]"],
           rewrite_rule => ['/Tiled/. - [F]'],
@@ -80,7 +81,7 @@ class nbngateway::webserver(
           rewrite_rule => ['/arcgis/(.*) http://old-gis\.nbn\.org\.uk/arcgis/$1'],
         }
     ],
-    proxy_pass => [
+    proxy_pass    => [
       {path => '/Tiled', url => '!'},
       {path => '/',      url => "ajp://localhost:${$gis_port}/"}
     ],
