@@ -88,4 +88,5 @@ class nbngateway (
   include nbngateway::webserver::webapps
   include nbngateway::webserver::redirects
   include nbngateway::webserver::static
+  include nbngateway::solr_index
 }
