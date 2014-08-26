@@ -70,6 +70,7 @@ class nbngateway::settings (
     file { '/nbnv-settings/api.authenticatorkey' :
       mode    => 0600,
       content => base64('decode', $authenticator_key),
+      notify  => Service['tomcat7-api'],
     }
   }
 
@@ -77,6 +78,7 @@ class nbngateway::settings (
     file { '/nbnv-settings/api.resetcredentialskey' :
       mode    => 0600,
       content => base64('decode', $credentials_reset_key),
+      notify  => Service['tomcat7-api'],
     }
   }
 }
