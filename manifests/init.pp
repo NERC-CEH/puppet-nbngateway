@@ -62,7 +62,7 @@ class nbngateway (
   }
 
   $core_db = $environment ? {
-    'production' => 'NBNCoreLive',
+    'production' => 'NBNCore',
     default      => 'TestNBNCore',
   }
 
