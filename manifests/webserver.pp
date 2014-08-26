@@ -11,17 +11,23 @@
 # [*api_port*] The ajp port which the api tomcat will be running on
 # [*gis_port*] The ajp port which the gis tomcat will be running on
 # [*importer_port*] The ajp port which the importer will be running on
+# [*data_jolokia_port*] The jolokia port to use for monitoring the data tomcat
+# [*api_jolokia_port*] The jolokia port to use for monitoring the api tomcat
+# [*importer_jolokia_port*] The jolokia port to use for monitoring the importer tomcat
 #
 # === Authors
 #
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
 class nbngateway::webserver(
-  $solr_port     = 7000,
-  $data_port     = 7100,
-  $api_port      = 7101,
-  $gis_port      = 7102,
-  $importer_port = 7103,
+  $solr_port             = 7000,
+  $data_port             = 7100,
+  $api_port              = 7101,
+  $gis_port              = 7102,
+  $importer_port         = 7103,
+  $data_jolokia_port     = 9010,
+  $api_jolokia_port      = 9011,
+  $importer_jolokia_port = 9012,
 ) {
   include tomcat  
   include apache
@@ -33,11 +39,13 @@ class nbngateway::webserver(
   }
 
   tomcat::instance { 'data' :
-    ajp_port => $data_port,
+    ajp_port     => $data_port,    
+    jolokia_port => $data_jolokia_port,
   }
 
   tomcat::instance { 'api' :
-    ajp_port => $api_port,
+    ajp_port     => $api_port,
+    jolokia_port => $api_jolokia_port,
   }
 
   tomcat::instance { 'gis' :
@@ -45,7 +53,8 @@ class nbngateway::webserver(
   }
 
   tomcat::instance { 'importer' :
-    ajp_port => $importer_port,
+    ajp_port     => $importer_port,    
+    jolokia_port => $importer_jolokia_port,
   }
 
   Apache::Vhost {
