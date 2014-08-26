@@ -10,16 +10,18 @@
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
 class nbngateway::settings (
-  $warehouse_db_server  = $nbngateway::warehouse_db_server,
-  $master_db_sever      = $nbngateway::master_db_sever,
-  $warehouse_db         = $nbngateway::warehouse_db,
-  $core_db              = $nbngateway::core_db,
-  $api_db_user          = $nbngateway::api_db_user,
-  $importer_db_user     = $nbngateway::importer_db_user,
-  $gis_db_username      = $nbngateway::gis_db_username,
-  $api_db_password      = $nbngateway::api_db_password,
-  $importer_db_password = $nbngateway::importer_db_password,
-  $gis_db_password      = $nbngateway::gis_db_password
+  $warehouse_db_server   = $nbngateway::warehouse_db_server,
+  $master_db_sever       = $nbngateway::master_db_sever,
+  $warehouse_db          = $nbngateway::warehouse_db,
+  $core_db               = $nbngateway::core_db,
+  $api_db_user           = $nbngateway::api_db_user,
+  $importer_db_user      = $nbngateway::importer_db_user,
+  $gis_db_username       = $nbngateway::gis_db_username,
+  $api_db_password       = $nbngateway::api_db_password,
+  $importer_db_password  = $nbngateway::importer_db_password,
+  $gis_db_password       = $nbngateway::gis_db_password,
+  $authenticator_key     = $nbngateway::authenticator_key,
+  $credentials_reset_key = $nbngateway::credentials_reset_key
 ) {
   include tomcat
   
@@ -62,5 +64,19 @@ class nbngateway::settings (
   file { '/nbnv-settings/settings.properties':
     mode    => 0600,
     content => template('nbngateway/settings.properties.erb'),
+  }
+
+  if $authenticator_key {
+    file { '/nbnv-settings/api.authenticatorkey' :
+      mode    => 0600,
+      content => base64('decode', $authenticator_key),
+    }
+  }
+
+  if $credentials_reset_key {
+    file { '/nbnv-settings/api.resetcredentialskey' :
+      mode    => 0600,
+      content => base64('decode', $credentials_reset_key),
+    }
   }
 }
