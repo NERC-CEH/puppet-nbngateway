@@ -1,23 +1,24 @@
 # == Class: nbngateway::solr_index
 #
 # This is the solr_index class. It will perform a solr data import when the solr
-# server service has been restarted.
+# server service has been restarted. It will also manage the solr tomcat and 
+# application deployment.
 #
 # === Parameters
 #
-# [*solr_port*] The http port which the solr server will be running on
-# [*solr_war*]  The location of the solr deploy locally
-# [*command*]   The solr data import command to run
-# [*clean*]     If the solr index should be cleaned
-# [*commit*]    If the solr index should be committed
+# [*port*]    The http port which the solr server will be running on
+# [*war*]     The location of the solr deploy locally
+# [*command*] The solr data import command to run
+# [*clean*]   If the solr index should be cleaned
+# [*commit*]  If the solr index should be committed
 #
 # === Authors
 #
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
 class nbngateway::solr_index(
-  $solr_port = 7000,
-  $solr_war  = undef,
+  $port      = 7000,
+  $war       = undef,
   $command   = 'full-import',
   $clean     = 'true',
   $commit    = 'true'
@@ -26,7 +27,7 @@ class nbngateway::solr_index(
   $solr_dataimport = "http://localhost:${solr_port}/solr/dataimport"
 
   tomcat::instance { 'solr' :
-    http_port => $solr_port,
+    http_port => $port,
   }
 
   tomcat::deployment { 'deploy the solr server' :
@@ -34,7 +35,7 @@ class nbngateway::solr_index(
     group       => 'uk.org.nbn',
     artifact    => 'nbnv-api-solr',
     application => 'solr',
-    war         => $solr_war,
+    war         => $war,
   }
 
   exec { 'Index solr' :
