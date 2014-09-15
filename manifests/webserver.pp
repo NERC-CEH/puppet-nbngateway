@@ -6,7 +6,6 @@
 #
 # === Parameters
 #
-# [*solr_port*] The http port which the solr server will be running on
 # [*data_port*] The ajp port which the data tomcat server will be running on
 # [*api_port*] The ajp port which the api tomcat will be running on
 # [*gis_port*] The ajp port which the gis tomcat will be running on
@@ -18,7 +17,6 @@
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
 class nbngateway::webserver(
-  $solr_port             = 7000,
   $data_port             = 7100,
   $api_port              = 7101,
   $gis_port              = 7102,

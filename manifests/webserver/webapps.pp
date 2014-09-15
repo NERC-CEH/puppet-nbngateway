@@ -14,7 +14,6 @@
 # [*recordcleaner_war*]     The location of the recordcleaner deploy locally
 # [*documentation_war*]     The location of the documentation deploy locally
 # [*api_war*]               The location of the api deploy locally
-# [*solr_war*]              The location of the solr deploy locally
 # [*gis_war*]               The location of the gis deploy locally
 #
 # === Authors
@@ -27,7 +26,6 @@ class nbngateway::webserver::webapps (
   $recordcleaner_war    = undef,
   $documentation_war    = undef,
   $api_war              = undef,
-  $solr_war             = undef,
   $gis_war              = undef,
 ) {
   Tomcat::Deployment {
@@ -67,13 +65,6 @@ class nbngateway::webserver::webapps (
     artifact    => 'nbnv-api',
     application => 'api',
     war         => $api_war,
-  }
-
-  tomcat::deployment { 'deploy the solr server' :
-    tomcat      => 'solr',
-    artifact    => 'nbnv-api-solr',
-    application => 'solr',
-    war         => $solr_war,
   }
 
   tomcat::deployment { 'deploy the gis webapp' :
