@@ -27,7 +27,7 @@ define nbngateway::webserver::data (
 ) {
   apache::balancermember { $title :
     balancer_cluster => 'data',
-    url              => 'ajp://localhost:${port}'
+    url              => "ajp://localhost:${port}",
   }
 
   tomcat::instance { $title :
@@ -39,20 +39,20 @@ define nbngateway::webserver::data (
     group => 'uk.org.nbn',
   }
 
-  tomcat::deployment { 'deploy the portal webapp' :
+  tomcat::deployment { "deploy the portal webapp ${title}" :
     tomcat   => 'data',
     artifact => 'nbnv-portal',
     war      => $portal_war,
   }
 
-  tomcat::deployment { 'deploy the imt webapp' :
+  tomcat::deployment { "deploy the imt webapp ${title}" :
     tomcat      => 'data',
     artifact    => 'nbnv-imt',
     application => 'imt',
     war         => $imt_war,
   }
 
-  tomcat::deployment { 'deploy the record cleaner webapp' :
+  tomcat::deployment { "deploy the record cleaner webapp ${title}" :
     tomcat      => 'data',
     group       => 'uk.gov.nbn.data',
     artifact    => 'nbnv-recordcleaner',
@@ -60,7 +60,7 @@ define nbngateway::webserver::data (
     war         => $recordcleaner_war,
   }
 
-  tomcat::deployment { 'deploy the documentation webapp' :
+  tomcat::deployment { "deploy the documentation webapp ${title}" :
     tomcat      => 'data',
     artifact    => 'nbnv-documentation',
     application => 'Documentation',

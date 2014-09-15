@@ -19,7 +19,7 @@ define nbngateway::webserver::gis (
 ) {
   apache::balancermember { $title :
     balancer_cluster => 'gis',
-    url              => 'ajp://localhost:${port}'
+    url              => "ajp://localhost:${port}",
   }
 
   tomcat::instance { $title :
@@ -27,7 +27,7 @@ define nbngateway::webserver::gis (
     jolokia_port => $jolokia_port,
   }
 
-  tomcat::deployment { 'deploy the gis ${title}' :
+  tomcat::deployment { "deploy the gis ${title}" :
     tomcat   => 'gis',
     group    => 'uk.org.nbn',
     artifact => 'nbnv-gis',

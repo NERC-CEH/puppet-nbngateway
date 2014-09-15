@@ -21,7 +21,7 @@ define nbngateway::webserver::api (
 ) {
   apache::balancermember { $title :
     balancer_cluster => 'api',
-    url              => 'ajp://localhost:${port}'
+    url              => "ajp://localhost:${port}",
   }
 
   tomcat::instance { $title :
