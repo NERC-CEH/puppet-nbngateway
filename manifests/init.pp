@@ -96,6 +96,7 @@ class nbngateway (
   include nbngateway::maps
   include nbngateway::settings
   include nbngateway::webserver
+  include nbngateway::webserver::importer
   include nbngateway::webserver::webapps
   include nbngateway::webserver::redirects
   include nbngateway::webserver::static
