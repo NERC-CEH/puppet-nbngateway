@@ -1,0 +1,12 @@
+## Proxy rules
+ProxyRequests Off
+
+ProxyPass /Tiled !
+<Location /Tiled>
+  ProxyPassReverse !
+</Location>
+
+ProxyPass / ajp://localhost:<%= @gis_port %>/
+<Location />
+  ProxyPassReverse ajp://localhost:<%= @gis_port %>/
+</Location>

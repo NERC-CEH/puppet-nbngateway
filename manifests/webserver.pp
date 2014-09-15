@@ -90,19 +90,12 @@ class nbngateway::webserver(
           rewrite_rule => ['/arcgis/(.*) http://old-gis\.nbn\.org\.uk/arcgis/$1'],
         }
     ],
-    proxy_pass    => [
-      {path => '/Tiled', url => '!'},
-      {path => '/',      url => "ajp://localhost:${$gis_port}/"}
-    ],
+    custom_fragment => template('nbngateway/_gis.nbn.org.uk_proxy.erb'),
   }
 
   apache::vhost { 'https_data.nbn.org.uk' :
-    servername => $nbngateway::data_servername,
-    proxy_pass => [
-      {path => '/images/',           url => '!'},
-      {path => '/api/',              url => "ajp://localhost:${api_port}/api/"},
-      {path => '/',                  url => "ajp://localhost:${data_port}/"}
-    ],
+    servername      => $nbngateway::data_servername,
+    custom_fragment => template('nbngateway/_data.nbn.org.uk_proxy.erb'),
   }
 
   ### Copy the SSL certificates into place ###
