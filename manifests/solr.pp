@@ -1,4 +1,4 @@
-# == Class: nbngateway::solr_index
+# == Class: nbngateway::solr
 #
 # This is the solr_index class. It will perform a solr data import when the solr
 # server service has been restarted. It will also manage the solr tomcat and 
@@ -16,7 +16,7 @@
 #
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
-class nbngateway::solr_index(
+class nbngateway::solr(
   $port      = 7000,
   $war       = undef,
   $command   = 'full-import',
