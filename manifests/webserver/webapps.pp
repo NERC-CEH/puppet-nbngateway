@@ -16,8 +16,6 @@
 # [*api_war*]               The location of the api deploy locally
 # [*solr_war*]              The location of the solr deploy locally
 # [*gis_war*]               The location of the gis deploy locally
-# [*importer_war*]          The location of the importer deploy locally
-# [*spatial_importer_war*]  The location of the spatial importer deploy locally
 #
 # === Authors
 #
@@ -31,8 +29,6 @@ class nbngateway::webserver::webapps (
   $api_war              = undef,
   $solr_war             = undef,
   $gis_war              = undef,
-  $importer_war         = undef,
-  $spatial_importer_war = undef
 ) {
   Tomcat::Deployment {
     group => 'uk.org.nbn',

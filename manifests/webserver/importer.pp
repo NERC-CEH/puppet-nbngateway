@@ -27,6 +27,7 @@ class nbngateway::webserver::importer (
 
   tomcat::deployment { 'deploy the importer webapp' :
     tomcat      => 'importer',
+    group       => 'uk.org.nbn',
     artifact    => 'nbnv-importer-ui',
     application => 'importer',
     war         => $importer_war,
@@ -34,6 +35,7 @@ class nbngateway::webserver::importer (
 
   tomcat::deployment { 'deploy the spatial importer webapp' :
     tomcat      => 'importer',
+    group       => 'uk.org.nbn',
     artifact    => 'nbnv-importer-spatial-ui',
     application => 'spatial-importer',
     war         => $spatial_importer_war,
