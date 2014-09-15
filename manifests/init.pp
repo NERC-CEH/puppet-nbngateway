@@ -28,6 +28,16 @@
 # [*master_db_sever*]       the servername of the database to use as the master
 # [*environment*]           either developer, staging or production
 #
+# [*portal_war*]            The location of the portal war file to deploy
+# [*imt_war*]               The location of the imt war file to deploy
+# [*recordcleaner_war*]     The location of the recordcleaner deploy locally
+# [*documentation_war*]     The location of the documentation deploy locally
+# [*api_war*]               The location of the api deploy locally
+# [*solr_war*]              The location of the solr deploy locally
+# [*gis_war*]               The location of the gis deploy locally
+# [*importer_war*]          The location of the importer deploy locally
+# [*spatial_importer_war*]  The location of the spatial importer deploy locally
+#
 # === Authors
 #
 # - Christopher Johnson - cjohn@ceh.ac.uk
@@ -49,7 +59,16 @@ class nbngateway (
   $authenticator_key     = undef,
   $credentials_reset_key = undef,
   $master_db_sever       = 'nbn-master.nerc-lancaster.ac.uk',
-  $environment           = 'development'
+  $environment           = 'development',
+  $portal_war            = undef,
+  $imt_war               = undef,
+  $recordcleaner_war     = undef,
+  $documentation_war     = undef,
+  $api_war               = undef,
+  $solr_war              = undef,
+  $gis_war               = undef,
+  $importer_war          = undef,
+  $spatial_importer_war  = undef
 ) {
   $warehouse_db_server = $environment ? {
     'production' => 'nbnwarehouse.nerc-lancaster.ac.uk',

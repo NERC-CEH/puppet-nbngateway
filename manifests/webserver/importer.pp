@@ -17,8 +17,8 @@
 class nbngateway::webserver::importer (
   $port                 = 8080,
   $jolokia_port         = 9012,
-  $importer_war         = undef,
-  $spatial_importer_war = undef
+  $importer_war         = $nbngateway::importer_war,
+  $spatial_importer_war = $nbngateway::spatial_importer_war
 ) {
   tomcat::instance { 'importer' :
     http_port    => $port,    

@@ -18,7 +18,7 @@
 #
 class nbngateway::solr(
   $port      = 7000,
-  $war       = undef,
+  $war       = $nbngateway::solr_war,
   $command   = 'full-import',
   $clean     = 'true',
   $commit    = 'true'

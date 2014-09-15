@@ -6,64 +6,26 @@
 #
 # === Parameters
 #
-# [*data_port*] The ajp port which the data tomcat server will be running on
-# [*api_port*] The ajp port which the api tomcat will be running on
-# [*gis_port*] The ajp port which the gis tomcat will be running on
-# [*data_jolokia_port*] The jolokia port to use for monitoring the data tomcat
-# [*api_jolokia_port*] The jolokia port to use for monitoring the api tomcat
 #
 # === Authors
 #
 # - Christopher Johnson - cjohn@ceh.ac.uk
 #
-class nbngateway::webserver(
-  $data_port             = 7100,
-  $api_port              = 7101,
-  $gis_port              = 7102,
-  $data_jolokia_port     = 9010,
-  $api_jolokia_port      = 9011
-) {
+class nbngateway::webserver {
   include tomcat  
   include apache
   include apache::mod::ssl
   include apache::mod::proxy_ajp
 
-  tomcat::instance { 'solr' :
-    http_port => $solr_port,
-  }
-
-  tomcat::instance { 'data' :
-    ajp_port     => $data_port,    
-    jolokia_port => $data_jolokia_port,
-  }
-
-  tomcat::instance { 'api' :
-    ajp_port     => $api_port,
-    jolokia_port => $api_jolokia_port,
-  }
-
-  tomcat::instance { 'gis' :
-    ajp_port => $gis_port,
-  }
-
   apache::balancer { 'data': }
   apache::balancer { 'api': }
   apache::balancer { 'gis': }
 
-  apache::balancermember { 'data_tomcat' :
-    balancer_cluster => 'data',
-    url              => 'ajp://localhost:${data_port}'
-  }
-
-  apache::balancermember { 'api_tomcat' :
-    balancer_cluster => 'api',
-    url              => 'ajp://localhost:${api_port}'
-  }
-
-  apache::balancermember { 'gis_tomcat' :
-    balancer_cluster => 'gis',
-    url              => 'ajp://localhost:${gis_port}'
-  }
+  # Create single instances of the various load balanced sections of the 
+  # webserver
+  nbngateway::webserver::api { 'api' :}
+  nbngateway::webserver::data { 'data' :}
+  nbngateway::webserver::gis { 'gis' :}
 
   Apache::Vhost {
     port      => '443',
