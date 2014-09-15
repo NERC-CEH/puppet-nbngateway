@@ -83,6 +83,11 @@ class nbngateway (
     'production'  => 'data.nbn.org.uk',
   }
 
+  $email_mode = $environment ? {
+    'production' => 'live',
+    default      => 'dev',
+  }
+
   # The servernames should resolve to this box internally
   host { [$data_servername, $gis_servername] :
     ip => '127.0.0.1',

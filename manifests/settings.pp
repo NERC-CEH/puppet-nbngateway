@@ -21,7 +21,8 @@ class nbngateway::settings (
   $importer_db_password  = $nbngateway::importer_db_password,
   $gis_db_password       = $nbngateway::gis_db_password,
   $authenticator_key     = $nbngateway::authenticator_key,
-  $credentials_reset_key = $nbngateway::credentials_reset_key
+  $credentials_reset_key = $nbngateway::credentials_reset_key,
+  $email_mode            = $nbngateway::email_mode
 ) {
   include tomcat
   
