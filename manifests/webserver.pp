@@ -57,6 +57,25 @@ class nbngateway::webserver(
     jolokia_port => $importer_jolokia_port,
   }
 
+  apache::balancer { 'data': }
+  apache::balancer { 'api': }
+  apache::balancer { 'gis': }
+
+  apache::balancermember { 'data_tomcat' :
+    balancer_cluster => 'data',
+    url              => 'ajp://localhost:${data_port}'
+  }
+
+  apache::balancermember { 'api_tomcat' :
+    balancer_cluster => 'api',
+    url              => 'ajp://localhost:${api_port}'
+  }
+
+  apache::balancermember { 'gis_tomcat' :
+    balancer_cluster => 'gis',
+    url              => 'ajp://localhost:${gis_port}'
+  }
+
   Apache::Vhost {
     port      => '443',
     ssl       => true,
@@ -92,7 +111,7 @@ class nbngateway::webserver(
     ],
     proxy_pass    => [
       {path => '/Tiled', url => '!'},
-      {path => '/',      url => "ajp://localhost:${$gis_port}/"}
+      {path => '/',      url => "balancer://gis/"}
     ],
   }
 
@@ -100,8 +119,8 @@ class nbngateway::webserver(
     servername => $nbngateway::data_servername,
     proxy_pass => [
       {path => '/images/',           url => '!'},
-      {path => '/api/',              url => "ajp://localhost:${api_port}/api/"},
-      {path => '/',                  url => "ajp://localhost:${data_port}/"}
+      {path => '/api/',              url => "balancer://api/api/"},
+      {path => '/',                  url => "balancer://data/"}
     ],
   }
 
