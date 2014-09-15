@@ -24,7 +24,7 @@ class nbngateway::webserver(
   $data_port             = 7100,
   $api_port              = 7101,
   $gis_port              = 7102,
-  $importer_port         = 7103,
+  $importer_port         = 8080,
   $data_jolokia_port     = 9010,
   $api_jolokia_port      = 9011,
   $importer_jolokia_port = 9012,
@@ -53,7 +53,7 @@ class nbngateway::webserver(
   }
 
   tomcat::instance { 'importer' :
-    ajp_port     => $importer_port,    
+    http_port    => $importer_port,    
     jolokia_port => $importer_jolokia_port,
   }
 
@@ -101,8 +101,6 @@ class nbngateway::webserver(
     proxy_pass => [
       {path => '/images/',           url => '!'},
       {path => '/api/',              url => "ajp://localhost:${api_port}/api/"},
-      {path => '/importer/',         url => "ajp://localhost:${importer_port}/importer/"},
-      {path => '/spatial-importer/', url => "ajp://localhost:${importer_port}/spatial-importer/"},
       {path => '/',                  url => "ajp://localhost:${data_port}/"}
     ],
   }
