@@ -32,6 +32,7 @@ class nbngateway::webserver(
   include tomcat  
   include apache
   include apache::mod::ssl
+  include apache::mod::proxy
   include apache::mod::proxy_ajp
 
   tomcat::instance { 'solr' :
@@ -90,19 +91,12 @@ class nbngateway::webserver(
           rewrite_rule => ['/arcgis/(.*) http://old-gis\.nbn\.org\.uk/arcgis/$1'],
         }
     ],
-    proxy_pass    => [
-      {path => '/Tiled', url => '!'},
-      {path => '/',      url => "ajp://localhost:${$gis_port}/"}
-    ],
+    custom_fragment => template('nbngateway/vhost_gis.nbn.org.uk.conf.erb'),
   }
 
   apache::vhost { 'https_data.nbn.org.uk' :
-    servername => $nbngateway::data_servername,
-    proxy_pass => [
-      {path => '/images/',           url => '!'},
-      {path => '/api/',              url => "ajp://localhost:${api_port}/api/"},
-      {path => '/',                  url => "ajp://localhost:${data_port}/"}
-    ],
+    servername      => $nbngateway::data_servername,
+    custom_fragment => template('nbngateway/vhost_data.nbn.org.uk.conf.erb'),
   }
 
   ### Copy the SSL certificates into place ###

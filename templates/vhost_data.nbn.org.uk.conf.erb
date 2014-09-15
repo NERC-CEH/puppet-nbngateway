@@ -1,0 +1,16 @@
+ProxyRequests Off
+
+ProxyPass /images/ !
+<Location /images/>
+  ProxyPassReverse !
+</Location>
+
+ProxyPass /api/ ajp://localhost:<%= @api_port %>/api/ retry=0
+<Location /api/>
+  ProxyPassReverse ajp://localhost:<%= @api_port %>/api/
+</Location>
+
+ProxyPass / ajp://localhost:<%= @data_port %>/ retry=0
+<Location />
+  ProxyPassReverse ajp://localhost:<%= @data_port %>/
+</Location>
