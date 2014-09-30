@@ -11,7 +11,6 @@
 #
 # [*portal_war*]            The location of the portal war file to deploy
 # [*imt_war*]               The location of the imt war file to deploy
-# [*recordcleaner_war*]     The location of the recordcleaner deploy locally
 # [*documentation_war*]     The location of the documentation deploy locally
 # [*api_war*]               The location of the api deploy locally
 # [*solr_war*]              The location of the solr deploy locally
@@ -26,7 +25,6 @@
 class nbngateway::webserver::webapps (
   $portal_war           = undef,
   $imt_war              = undef,
-  $recordcleaner_war    = undef,
   $documentation_war    = undef,
   $api_war              = undef,
   $solr_war             = undef,
@@ -49,14 +47,6 @@ class nbngateway::webserver::webapps (
     artifact    => 'nbnv-imt',
     application => 'imt',
     war         => $imt_war,
-  }
-
-  tomcat::deployment { 'deploy the record cleaner webapp' :
-    tomcat      => 'data',
-    group       => 'uk.gov.nbn.data',
-    artifact    => 'nbnv-recordcleaner',
-    application => 'recordcleaner',
-    war         => $recordcleaner_war,
   }
 
   tomcat::deployment { 'deploy the documentation webapp' :

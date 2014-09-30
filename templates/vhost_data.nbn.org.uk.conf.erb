@@ -6,6 +6,11 @@ ProxyPass /images/ !
   ProxyPassReverse !
 </Location>
 
+ProxyPass /recordcleaner/ !
+<Location /recordcleaner/>
+  ProxyPassReverse !
+</Location>
+
 ProxyPass /api/ ajp://localhost:<%= @api_port %>/api/ retry=0
 <Location /api/>
   ProxyPassReverse ajp://localhost:<%= @api_port %>/api/
