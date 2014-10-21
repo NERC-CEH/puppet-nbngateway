@@ -93,6 +93,7 @@ class nbngateway (
     ip => '127.0.0.1',
   }
 
+  include nbngateway::logarchive
   include nbngateway::maps
   include nbngateway::settings
   include nbngateway::webserver

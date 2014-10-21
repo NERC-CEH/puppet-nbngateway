@@ -1,0 +1,12 @@
+#!/bin/bash
+
+now=`date +"%Y_%m_%d_%H_%M"`
+logdir="<%= @directory %>"
+
+mkdir -p $logdir
+
+for tomcat in data api gis importer
+do
+  tar -czf "$logdir/$tomcat-$now.tgz" /home/tomcat7/$tomcat/logs/*.*.*
+  rm -Rf /home/tomcat7/$tomcat/logs/*.*.*
+done
