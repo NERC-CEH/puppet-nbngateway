@@ -5,8 +5,4 @@ logdir="<%= @directory %>"
 
 mkdir -p $logdir
 
-for tomcat in data api gis importer
-do
-  tar -czf "$logdir/$tomcat-$now.tgz" /home/tomcat7/$tomcat/logs/*.*.*
-  rm -Rf /home/tomcat7/$tomcat/logs/*.*.*
-done
+find /home/tomcat7/*/logs/* -type f -mtime +1 -print0 | tar -czf "$logdir/tomcat-$now.tgz" --remove-files --null -T -
