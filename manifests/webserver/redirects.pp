@@ -12,7 +12,7 @@
 #
 class nbngateway::webserver::redirects {
   Apache::Vhost {
-    docroot       => '/var/www',
+    docroot       => '/opt/nbn-www',
     default_vhost => true,
     port          => 80,
   }
@@ -20,6 +20,8 @@ class nbngateway::webserver::redirects {
   apache::vhost { 'http_data.nbn.org.uk' :
     servername    => $nbngateway::data_servername,
     rewrites   => [{
+      rewrite_rule  => '^/recordcleaner - [L,NC]',
+    },{
       rewrite_cond  => '%{HTTPS} off',
       rewrite_rule  => '(.*) https://%{HTTP_HOST}%{REQUEST_URI}',
     }]
