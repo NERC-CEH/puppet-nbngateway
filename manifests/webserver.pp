@@ -59,13 +59,14 @@ class nbngateway::webserver(
   }
 
   Apache::Vhost {
-    port      => '443',
-    ssl       => true,
-    ssl_cert  => '/etc/ssl/nbn.crt',
-    ssl_key   => '/etc/ssl/private/nbn.key',
-    ssl_chain => $nbngateway::ssl_chain,
-    ssl_ca    => $nbngateway::ssl_ca,
-    docroot   => '/opt/nbn-www',
+    port         => '443',
+    ssl          => true,
+    ssl_cert     => '/etc/ssl/nbn.crt',
+    ssl_key      => '/etc/ssl/private/nbn.key',
+    ssl_chain    => $nbngateway::ssl_chain,
+    ssl_ca       => $nbngateway::ssl_ca,
+    ssl_protocol => 'All -SSLv2 -SSLv3',
+    docroot      => '/opt/nbn-www',
   }
 
   # Replace the . in the servername of the data with \. So that we can use it as a 
