@@ -52,7 +52,7 @@ class nbngateway (
   $environment           = 'development'
 ) {
   $warehouse_db_server = $environment ? {
-    'production' => 'nbnwarehouse.nerc-lancaster.ac.uk',
+    'production' => 'nbn-b.nerc-lancaster.ac.uk',
     default      => 'nbn-b.nerc-lancaster.ac.uk',
   }
 
