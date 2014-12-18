@@ -13,7 +13,7 @@
 class nbngateway::logarchive (
   $directory = '/var/log/nbn'
 ) {
-  file { '/etc/cron.monthly/nbn-logarchive' :
+  file { '/etc/cron.weekly/nbn-logarchive' :
     mode    => 0755,
     ensure  => file,
     content => template('nbngateway/logarchive.sh.erb'),
