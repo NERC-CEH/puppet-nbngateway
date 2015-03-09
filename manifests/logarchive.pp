@@ -18,4 +18,11 @@ class nbngateway::logarchive (
     ensure  => file,
     content => template('nbngateway/logarchive.sh.erb'),
   }
+
+  logrotate::rule { 'tomcat':
+    path          => '/home/tomcat7/*/logs/catalina.out',
+    copytruncate  => true,
+    missingok     => true,
+    rotate_every  => 'day',
+  }
 }
