@@ -25,7 +25,6 @@
 #   the api web app will generate this.
 # [*credentials_reset_key*] Base64 encoded credentials reset key. Used when 
 #   reseting passwords. If not supplied the api web app will generate this.
-# [*master_db_sever*]       the servername of the database to use as the master
 # [*environment*]           either developer, staging or production
 #
 # === Authors
@@ -48,9 +47,13 @@ class nbngateway (
   $gis_db_username       = 'NBNGIS',
   $authenticator_key     = undef,
   $credentials_reset_key = undef,
-  $master_db_sever       = 'nbn-master.nerc-lancaster.ac.uk',
   $environment           = 'development'
 ) {
+  $master_db_sever = $environment ? {
+    'production' => 'nbn-master.nerc-lancaster.ac.uk',
+    default      => 'nbn-b.nerc-lancaster.ac.uk',
+  }
+
   $warehouse_db_server = $environment ? {
     'production' => 'nbn-b.nerc-lancaster.ac.uk',
     default      => 'nbn-b.nerc-lancaster.ac.uk',
