@@ -21,4 +21,9 @@ class nbngateway::webserver::static {
      ensure => file,
      source => 'puppet:///modules/nbngateway/NBNPower.gif',
    }
+
+   file {'/var/www/default/index.html' :
+     ensure => file,
+     source => 'puppet:///modules/nbngateway/default_index.html'
+   }   
 }
